@@ -1,0 +1,226 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 TRANSITIONAL//EN">
+<html>
+    <head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Wikilator</title>
+    <style type="text/css">
+	*{font-family: "Calibri", "Arial", sans-serif;}
+	#content
+	{
+		width: 800px;
+		margin: 0px auto;
+	}
+	A:link
+	{
+		text-decoration: none;
+		color: black;
+	}
+	A:visited
+	{
+		color: black;
+	}
+	A:hover
+	{
+		text-decoration: underline;
+	}
+    	body
+	{
+		text-align: center;
+		margin:50px 0px; padding:0px;
+	}	
+	form
+	{
+		text-align: center;
+		font-size:120%;
+	}
+	select,input
+	{
+		vertical-align:middle; 
+		font-size:50%;
+	}
+        h1 
+	{
+		font-family: 'Linux Libertine', 'Hoefler Text', Georgia, 'Times New Roman', Times, serif;
+		font-variant: small-caps;
+		font-weight: normal;
+		text-align: center;
+		padding-top: 20px;
+		padding-bottom: 20px;
+		font-size:400%;
+	}
+        h2 
+	{
+		text-align: left;
+		padding: 20px;
+	}
+	.formElement
+	{
+		padding:5px;
+	}
+	.input 
+	{     
+		border: 1px solid #006; 
+		font-size: 90%;
+	} 
+	li
+	{
+		list-style: none;
+	}
+	.listingTitle
+	{
+		font-weight: bold;
+		font-size: 110%;
+	}
+	.listingSummary
+	{
+		font-size: 90%;
+		padding-left: 10px;
+		padding-right: 10px;
+		border: 20px solid red;
+	}
+	table.center
+	{
+		margin-left: auto;
+		margin-right: auto;
+	}
+	table
+	{
+		width: 750px;
+		table-layout: fixed;
+		padding: 20px;
+		margin: auto;
+	}
+	td
+	{
+		padding-left: 10px;
+		padding-right: 10px;
+		vertical-align: top;
+		width: 50%;
+	}
+	</style>
+	<script>
+	function getParams() {
+	var form=document.getElementById('form');
+	this.text = form.elements['text'].value;
+	this.source = form.elements['source'].value;
+	this.target = form.elements['target'].value;
+	return this;}
+	
+	function makeHttpObject() {
+  	try {return new XMLHttpRequest();}
+  	catch (error) {}
+  	try {return new ActiveXObject("Msxml2.XMLHTTP");}
+  	catch (error) {}
+  	try {return new ActiveXObject("Microsoft.XMLHTTP");}
+  	catch (error) {}
+	throw new Error("Could not create HTTP request object.");}
+	
+	function updateResults() {
+	var results = document.getElementById('results');
+	var request = makeHttpObject();
+	var params = getParams();
+	var path = "/cgi-bin/Main.py?text=" + params.text.replace(" ","_") + "&source=" + params.source + "&target=" + params.target;
+	request.open("GET", path, false);
+	request.send(null);
+	results.innerHTML = request.responseText;}
+	</script>
+    </head>
+	<body>
+		<div id="content">
+        <h1> 
+	    	    WikilatoR
+	</h1>
+	<form name="input" action="javascript: updateResults();" method="get" id="form">
+			<span class="formElement">
+			Wikilate: <input name="text" type="text" id="form_element" class="input"/>
+			</span>
+			<span class="formElement">From:
+				<select name="source" class="input">
+					<option value="ar">العربية</option><!-- Al-ʿArabīyah -->
+					<option value="bg">Български</option><!-- Bulgarski -->
+					<option value="ca">Català</option>
+					<option value="cs">Česky</option>
+					<option value="da">Dansk</option>
+					<option value="de">Deutsch</option>
+					<option value="en" selected="selected">English</option>
+					<option value="es">Español</option>
+					<option value="eo">Esperanto</option>
+					<option value="eu">Euskara</option>
+					<option value="fa">فارسی</option><!-- Fārsi -->
+					<option value="fr">Français</option>
+					<option value="ko">한국어</option><!-- Hangugeo -->
+					<option value="hi">हिन्दी</option><!-- Hindī -->
+					<option value="id">Bahasa Indonesia</option>
+					<option value="it">Italiano</option>
+					<option value="he">עברית</option><!-- ‘Ivrit -->
+					<option value="lt">Lietuvių</option>
+					<option value="hu">Magyar</option>
+					<option value="ms">Bahasa Melayu</option>
+					<option value="nl">Nederlands</option>
+					<option value="ja">日本語</option><!-- Nihongo -->
+					<option value="nb">Norsk (bokmål)</option>
+					<option value="pl">Polski</option>
+					<option value="pt">Português</option>
+					<option value="ro">Română</option>
+					<option value="ru">Русский</option><!-- Russkiy -->
+					<option value="sk">Slovenčina</option>
+					<option value="sl">Slovenščina</option>
+					<option value="sr">Српски / Srpski</option>
+					<option value="fi">Suomi</option>
+					<option value="sv">Svenska</option>
+					<option value="tr">Türkçe</option>
+					<option value="uk">Українська</option><!-- Ukrayins’ka -->
+					<option value="vi">Tiếng Việt</option>
+					<option value="vo">Volapük</option>
+					<option value="war">Winaray</option>
+					<option value="zh">中文</option><!-- Zhōngwén -->
+				</select>
+			</span>
+			<span class="formElement">To:
+				<select name="target" class="input">
+					<option value="ar">العربية</option><!-- Al-ʿArabīyah -->
+					<option value="bg">Български</option><!-- Bulgarski -->
+					<option value="ca">Català</option>
+					<option value="cs">Česky</option>
+					<option value="da">Dansk</option>
+					<option value="de">Deutsch</option>
+					<option value="en" selected="selected">English</option>
+					<option value="es">Español</option>
+					<option value="eo">Esperanto</option>
+					<option value="eu">Euskara</option>
+					<option value="fa">فارسی</option><!-- Fārsi -->
+					<option value="fr">Français</option>
+					<option value="ko">한국어</option><!-- Hangugeo -->
+					<option value="hi">हिन्दी</option><!-- Hindī -->
+					<option value="id">Bahasa Indonesia</option>
+					<option value="it">Italiano</option>
+					<option value="he">עברית</option><!-- ‘Ivrit -->
+					<option value="lt">Lietuvių</option>
+					<option value="hu">Magyar</option>
+					<option value="ms">Bahasa Melayu</option>
+					<option value="nl">Nederlands</option>
+					<option value="ja">日本語</option><!-- Nihongo -->
+					<option value="no">Norsk (bokmål)</option>
+					<option value="pl">Polski</option>
+					<option value="pt">Português</option>
+					<option value="ro">Română</option>
+					<option value="ru">Русский</option>
+					<option value="sk">Slovenčina</option>
+					<option value="sl">Slovenščina</option>
+					<option value="sr">Српски / Srpski</option>
+					<option value="fi">Suomi</option>
+					<option value="sv">Svenska</option>
+					<option value="tr">Türkçe</option>
+					<option value="uk">Українська</option>
+					<option value="vi">Tiếng Việt</option>
+					<option value="vo">Volapük</option>
+					<option value="war">Winaray</option>
+					<option value="zh">中文</option>
+				</select>
+			</span>
+			<span class="formElement">
+			<input type="button" name="Search" value="Go" class="input" onclick="updateResults()">
+			</span>
+		</form>
+		<div id="results"></div>
+</div></body></html>
